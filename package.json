@@ -1,6 +1,6 @@
 {
   "name": "react-tilt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tilt for react.js",
   "main": "dist/tilt.js",
   "author": "Jonathan Dion <jonathandionalary@gmail.com> (http://jonathandion.com/)",
