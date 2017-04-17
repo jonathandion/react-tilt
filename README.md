@@ -34,15 +34,15 @@ import Tilt from 'react-tilt'
 
 #### Props
 
-`
-onMouseEnter()
-onMouseMove()
-onMouseLeave()
-a → {}
+
+onMouseEnter()</br>
+onMouseMove()</br>
+onMouseLeave()</br>
+`a → {}`</br>
 Returns a React Synthetic Event
 
-options{}
-{}
+options{} </br>
+`{}`
 `
 
 ### Install
