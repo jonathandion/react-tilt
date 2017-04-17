@@ -4,7 +4,7 @@
 
 React version of [tilt.js](https://github.com/gijsroge/tilt.js)
 
-### Usage
+## Usage
 ```js
 import Tilt from 'react-tilt'
 
@@ -14,7 +14,7 @@ import Tilt from 'react-tilt'
 ```
 
 
-### Options
+## Options
 ```js
 {
 	reverse:        false,  // reverse the tilt direction
@@ -30,26 +30,27 @@ import Tilt from 'react-tilt'
 ```
 
 
-### API
+## API
+### Props
 
-#### Props
+**onMouseEnter()**
 
+**onMouseMove()**
 
-onMouseEnter()</br>
-onMouseMove()</br>
-onMouseLeave()</br>
+**onMouseLeave()**
+
 `a → {}`</br>
 Returns a React Synthetic Event
 
-options{} </br>
+**options{} ** </br>
 `{}`
-`
 
-### Install
+
+## Install
 - **yarn:** `yarn add react-tilt`
 - **npm:** `npm install --save react-tilt`
 
-### Alternatives
+## Alternatives
 - **JQuery JS version:** https://github.com/gijsroge/tilt.js
 - **Vanilla JS version:** https://github.com/micku7zu/vanilla-tilt.js
 
