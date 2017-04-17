@@ -8,9 +8,9 @@ React version of [tilt.js](https://github.com/gijsroge/tilt.js)
 ```js
 import Tilt from 'react-tilt'
 
-	<Tilt className="Tilt" options={{ max : 25 }} style={{ height: 250, width: 250 }} >
-	<div className="Tilt-inner"> 👽 </div>
-	</Tilt>
+<Tilt className="Tilt" options={{ max : 25 }} style={{ height: 250, width: 250 }} >
+ <div className="Tilt-inner"> 👽 </div>
+</Tilt>
 ```
 
 
@@ -25,7 +25,7 @@ import Tilt from 'react-tilt'
 	transition:     true,   // Set a transition on enter/exit.
 	axis:           null,   // What axis should be disabled. Can be X or Y.
 	reset:          true    // If the tilt effect has to be reset on exit.
-    easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
+	easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
 }
 ```
 
@@ -34,15 +34,16 @@ import Tilt from 'react-tilt'
 
 #### Props
 
+`
 onMouseEnter()
 onMouseMove()
 onMouseLeave()
-`a → {}`
+a → {}
 Returns a React Synthetic Event
 
 options{}
-`{}`
-
+{}
+`
 
 ### Install
 - **yarn:** `yarn add react-tilt`
