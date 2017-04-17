@@ -1,0 +1,15 @@
+{
+  "name": "react-tilt",
+  "version": "0.1.0",
+  "description": "Tilt for react.js",
+  "main": "tilt.js",
+  "author": "Jonathan Dion <jonathandionalary@gmail.com> (http://jonathandion.com/)",
+  "bugs": {
+    "url": ""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
+}
