@@ -1,6 +1,6 @@
 # react-tilt
 
-![react-tilt demo gif](https://github.com/jonathandion/react-tilt/demo.gif)
+![react-tilt demo gif](https://github.com/jonathandion/react-tilt/blob/master/demo.gif)
 
 React version of [tilt.js](https://github.com/gijsroge/tilt.js)
 
