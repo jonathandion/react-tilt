@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-// import Tilt from 'react-tilt'
-import Tilt from '../../dist/tilt';
+import Tilt from 'react-tilt'
 
 class App extends Component {
   render() {
