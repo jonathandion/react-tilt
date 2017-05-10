@@ -15,7 +15,7 @@
     "url": "https://github.com/jonathandion/react-tilt"
   },
   "scripts": {
-    "publish": "babel ./src --out-dir ./dist --presets=es2015,react"
+    "build": "babel ./src --out-dir ./dist --presets=es2015,react"
   },
   "dependencies": {
     "react": "^15.5.4",
