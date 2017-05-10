@@ -2,6 +2,8 @@
 
 ![Travis CI](https://travis-ci.org/jonathandion/react-tilt.svg?branch=master)
 
+[![NPM](https://nodei.co/npm/react-tilt.png?downloads=true)](https://www.npmjs.com/package/react-tilt)
+
 ![react-tilt demo gif](https://github.com/jonathandion/react-tilt/blob/master/demo.gif)
 
 React version of [tilt.js](https://github.com/gijsroge/tilt.js)
