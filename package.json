@@ -12,7 +12,7 @@
     "hover"
   ],
   "bugs": {
-    "url": "https://github.com/jonathandion/react-tilt"
+    "url": "https://github.com/jonathandion/react-tilt/issues"
   },
   "scripts": {
     "build": "babel ./src --out-dir ./dist --presets=es2015,react"
