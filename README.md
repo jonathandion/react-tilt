@@ -1,8 +1,15 @@
-# react-tilt
+# React.js - Tilt.js
+
+![Travis CI](https://travis-ci.org/jonathandion/react-tilt.svg?branch=master)
 
 ![react-tilt demo gif](https://github.com/jonathandion/react-tilt/blob/master/demo.gif)
 
 React version of [tilt.js](https://github.com/gijsroge/tilt.js)
+
+## Install
+- **yarn:** `yarn add react-tilt`
+- **npm:** `npm install --save react-tilt`
+
 
 ## Usage
 ```js
@@ -12,7 +19,6 @@ import Tilt from 'react-tilt'
  <div className="Tilt-inner"> 👽 </div>
 </Tilt>
 ```
-
 
 ## Options
 ```js
@@ -29,7 +35,6 @@ import Tilt from 'react-tilt'
 }
 ```
 
-
 ## API
 ### Props
 
@@ -41,10 +46,9 @@ import Tilt from 'react-tilt'
 
 **options{}** `{}`
 
-
-## Install
-- **yarn:** `yarn add react-tilt`
-- **npm:** `npm install --save react-tilt`
+## Todos
+- Tests
+- Flare effect
 
 ## Alternatives
 - **JQuery JS version:** https://github.com/gijsroge/tilt.js
