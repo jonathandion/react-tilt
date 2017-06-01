@@ -69,6 +69,12 @@ var Tilt = function (_Component) {
       this.element = (0, _reactDom.findDOMNode)(this);
     }
   }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearTimeout(this.transitionTimeout);
+      cancelAnimationFrame(this.updateCall);
+    }
+  }, {
     key: 'onMouseEnter',
     value: function onMouseEnter() {
       var cb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};

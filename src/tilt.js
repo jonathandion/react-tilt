@@ -39,6 +39,10 @@ class Tilt extends Component {
   componentDidMount() {
     this.element = findDOMNode(this)
   }
+  componentWillUnmount() {
+    clearTimeout(this.transitionTimeout);
+    cancelAnimationFrame(this.updateCall);
+  }
   onMouseEnter(cb = () => {}, e) {
     this.updateElementPosition();
 
