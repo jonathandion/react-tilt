@@ -2,7 +2,6 @@
 
 ![Travis CI](https://travis-ci.org/jonathandion/react-tilt.svg?branch=master)
 
-[![NPM](https://nodei.co/npm/react-tilt.png?downloads=true)](https://www.npmjs.com/package/react-tilt)
 
 ![react-tilt demo gif](https://github.com/jonathandion/react-tilt/blob/master/demo.gif)
 
@@ -38,19 +37,18 @@ import Tilt from 'react-tilt'
 ```
 
 ## API
-### Props
 
-**onMouseEnter()** `a → {}` Returns a React Synthetic Event
+| Property        | Type           | 
+| ------------- |:-------------:|
+| onMouseEnter     | Function -> SyntheticEvent |
+| onMouseMove      | Function -> SyntheticEvent      |
+| onMouseLeave | Function -> SyntheticEvent     |
+| options | Object    |
 
-**onMouseMove()** `a → {}` Returns a React Synthetic Event
 
-**onMouseLeave()** `a → {}` Returns a React Synthetic Event
-
-**options{}** `{}`
-
-## Todos
+## Roadmap
 - Tests
-- Flare effect
+- Add Flare effect
 
 ## Alternatives
 - **JQuery JS version:** https://github.com/gijsroge/tilt.js
