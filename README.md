@@ -38,11 +38,11 @@ import Tilt from 'react-tilt'
 
 ## API
 
-| Property        | Type           | 
+| Property        | Signature           | 
 | ------------- |:-------------:|
-| onMouseEnter     | Function -> SyntheticEvent |
-| onMouseMove      | Function -> SyntheticEvent      |
-| onMouseLeave | Function -> SyntheticEvent     |
+| onMouseEnter     | () -> SyntheticEvent |
+| onMouseMove      | () -> SyntheticEvent      |
+| onMouseLeave | () -> SyntheticEvent     |
 | options | Object    |
 
 
