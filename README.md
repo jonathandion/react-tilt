@@ -7,6 +7,9 @@
 
 React version of [tilt.js](https://github.com/gijsroge/tilt.js)
 
+### Demo
+https://vx-demo.now.sh/gallery
+
 ## Install
 - **yarn:** `yarn add react-tilt`
 - **npm:** `npm install --save react-tilt`
