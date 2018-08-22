@@ -38,7 +38,7 @@ class Tilt extends Component {
   }
   componentDidMount() {
     this.element = findDOMNode(this);
-    var myNode = this.getDOMNode();
+    const myNode = this.getDOMNode();
     setTimeout(() => {
       if (myNode.parentElement.querySelector(':hover') === myNode){
         this.onMouseEnter();
