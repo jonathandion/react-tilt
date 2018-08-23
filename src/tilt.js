@@ -37,7 +37,13 @@ class Tilt extends Component {
     this.onMouseLeave = this.onMouseLeave.bind(this, this.props.onMouseLeave);
   }
   componentDidMount() {
-    this.element = findDOMNode(this)
+    this.element = findDOMNode(this);
+    const myNode = this.getDOMNode();
+    setTimeout(() => {
+      if (myNode.parentElement.querySelector(':hover') === myNode){
+        this.onMouseEnter();
+      }
+    }, 0);
   }
   componentWillUnmount() {
     clearTimeout(this.transitionTimeout);
