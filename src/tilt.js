@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
+import React, { Component, createRef } from "react";
 
 class Tilt extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      style : {}
-    }
+      style: {}
+    };
 
     const defaultSettings = {
       reverse: false,
@@ -21,107 +20,111 @@ class Tilt extends Component {
       reset: true
     };
 
+    const { options, onMouseEnter, onMouseMove, onMouseLeave } = this.props;
+
     this.width = null;
     this.height = null;
     this.left = null;
     this.top = null;
     this.transitionTimeout = null;
     this.updateCall = null;
-    this.element = null;
-    this.settings = Object.assign({}, defaultSettings, this.props.options);
+    this.element = createRef();
+    this.settings = { ...defaultSettings, ...options };
     this.reverse = this.settings.reverse ? -1 : 1;
 
     // Events
-    this.onMouseEnter = this.onMouseEnter.bind(this, this.props.onMouseEnter);
-    this.onMouseMove = this.onMouseMove.bind(this, this.props.onMouseMove);
-    this.onMouseLeave = this.onMouseLeave.bind(this, this.props.onMouseLeave);
+    this.onMouseEnter = this.onMouseEnter.bind(this, onMouseEnter);
+    this.onMouseMove = this.onMouseMove.bind(this, onMouseMove);
+    this.onMouseLeave = this.onMouseLeave.bind(this, onMouseLeave);
   }
-  componentDidMount() {
-    this.element = findDOMNode(this);
-    const myNode = this.getDOMNode();
-    setTimeout(() => {
-      if (myNode.parentElement.querySelector(':hover') === myNode){
-        this.onMouseEnter();
-      }
-    }, 0);
-  }
+
   componentWillUnmount() {
     clearTimeout(this.transitionTimeout);
     cancelAnimationFrame(this.updateCall);
   }
-  onMouseEnter(cb = () => {}, e) {
+
+  onMouseEnter(callback = () => {}, event) {
     this.updateElementPosition();
 
-    this.setState(Object.assign({}, this.state, {
-      style : {
-        ...this.state.style,
-        willChange : "transform"
-      }
-    }))
+    const { style } = this.state;
+    style.willChange = "transform";
+
+    this.setState({
+      style
+    });
 
     this.setTransition();
 
-    return cb(e)
+    return callback(event);
   }
+
   reset() {
     window.requestAnimationFrame(() => {
-      this.setState(Object.assign({}, this.state, {
-        style : {
-          ...this.state.style,
-          transform : "perspective(" + this.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)" }
-      }))
+      const { style } = this.state;
+      style.transform =
+        `perspective(${this.settings.perspective}px) ` +
+        "rotateX(0deg) " +
+        "rotateY(0deg) " +
+        "scale3d(1, 1, 1)";
+
+      this.setState({
+        style
+      });
     });
   }
-  onMouseMove(cb = () => {}, e) {
-    e.persist();
+
+  onMouseMove(callback = () => {}, event) {
+    event.persist();
 
     if (this.updateCall !== null) {
       window.cancelAnimationFrame(this.updateCall);
     }
 
-    this.event = e;
-    this.updateCall = requestAnimationFrame(this.update.bind(this, e));
+    this.event = event;
+    this.updateCall = requestAnimationFrame(this.update.bind(this, event));
 
-    return cb(e);
+    return callback(event);
   }
+
   setTransition() {
     clearTimeout(this.transitionTimeout);
 
-    this.setState(Object.assign({}, this.state, {
-      style : {
-        ...this.state.style,
-        transition : this.settings.speed + "ms " + this.settings.easing
-      }
-    }))
+    const { speed, easing } = this.settings;
+    const { style } = this.state;
+    style.transition = `${speed}ms ${easing}`;
+    this.setState({
+      style
+    });
 
     this.transitionTimeout = setTimeout(() => {
-      this.setState(Object.assign({}, this.state, {
-        style : {
-          ...this.state.style,
-          transition: ''
-        }
-      }))
-    }, this.settings.speed);
+      style.transition = "";
+      this.setState({
+        style
+      });
+    }, speed);
   }
-  onMouseLeave(cb = () => {}, e) {
+
+  onMouseLeave(callback = () => {}, event) {
     this.setTransition();
 
-    if (this.settings.reset) {
-      this.reset();
-    }
-    return cb(e)
+    if (this.settings.reset) this.reset();
+
+    return callback(event);
   }
-  getValues(e) {
-    const x = (e.nativeEvent.clientX - this.left) / this.width;
-    const y = (e.nativeEvent.clientY - this.top) / this.height;
+
+  getValues({ nativeEvent }) {
+    const x = (nativeEvent.clientX - this.left) / this.width;
+    const y = (nativeEvent.clientY - this.top) / this.height;
     const _x = Math.min(Math.max(x, 0), 1);
     const _y = Math.min(Math.max(y, 0), 1);
 
-    const tiltX = (this.reverse * (this.settings.max / 2 - _x * this.settings.max)).toFixed(2);
-    const tiltY = (this.reverse * (_y * this.settings.max - this.settings.max / 2)).toFixed(2);
+    const { max } = this.settings;
 
-    const percentageX =  _x * 100
-    const percentageY = _y * 100
+    const tiltX = (this.reverse * (max / 2 - _x * max)).toFixed(2);
+    const tiltY = (this.reverse * (_y * max - max / 2)).toFixed(2);
+
+    const percentageX = _x * 100;
+    const percentageY = _y * 100;
 
     return {
       tiltX,
@@ -129,41 +132,56 @@ class Tilt extends Component {
       percentageX,
       percentageY
     };
-
   }
 
   updateElementPosition() {
-    const rect = this.element.getBoundingClientRect();
-    this.width = this.element.offsetWidth;
-    this.height = this.element.offsetHeight;
+    const rect = this.element.current.getBoundingClientRect();
+    ({
+      offsetWidth: this.width,
+      offsetHeight: this.height
+    } = this.element.current);
+
     this.left = rect.left;
     this.top = rect.top;
   }
 
-  update(e) {
-    let values = this.getValues(e);
+  update(event) {
+    let values = this.getValues(event);
 
-    this.setState(Object.assign({}, this.state, {
-        style : {
-          ...this.state.style,
-          transform: "perspective(" + this.settings.perspective + "px) " +
-                      "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
-                      "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
-                      "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")"
-        }
-      }))
+    const { perspective, axis, scale } = this.settings;
+    const { style } = this.state;
+
+    const rotateXdeg = axis === "x" ? 0 : values.tiltY;
+    const rotateYdeg = axis === "y" ? 0 : values.tiltX;
+
+    style.transform =
+      `perspective(${perspective}px) ` +
+      `rotateX(${rotateXdeg}deg) ` +
+      `rotateY(${rotateYdeg}deg) ` +
+      `scale3d(${scale}, ${scale}, ${scale})`;
+
+    this.setState({
+      style
+    });
 
     this.updateCall = null;
   }
+
   render() {
-    const style = Object.assign({}, this.props.style, this.state.style)
+    const style = {
+      ...this.props.style,
+      ...this.state.style
+    };
+
     return (
-      <div style={style}
+      <div
+        ref={this.element}
+        style={style}
         className={this.props.className}
         onMouseEnter={this.onMouseEnter}
         onMouseMove={this.onMouseMove}
         onMouseLeave={this.onMouseLeave}
-        >
+      >
         {this.props.children}
       </div>
     );
