@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8,11 +8,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = require('react-dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46,125 +44,139 @@ var Tilt = function (_Component) {
       reset: true
     };
 
+    var _this$props = _this.props,
+        options = _this$props.options,
+        onMouseEnter = _this$props.onMouseEnter,
+        onMouseMove = _this$props.onMouseMove,
+        onMouseLeave = _this$props.onMouseLeave;
+
+
     _this.width = null;
     _this.height = null;
     _this.left = null;
     _this.top = null;
     _this.transitionTimeout = null;
     _this.updateCall = null;
-    _this.element = null;
-    _this.settings = Object.assign({}, defaultSettings, _this.props.options);
+    _this.element = (0, _react.createRef)();
+    _this.settings = _extends({}, defaultSettings, options);
     _this.reverse = _this.settings.reverse ? -1 : 1;
 
     // Events
-    _this.onMouseEnter = _this.onMouseEnter.bind(_this, _this.props.onMouseEnter);
-    _this.onMouseMove = _this.onMouseMove.bind(_this, _this.props.onMouseMove);
-    _this.onMouseLeave = _this.onMouseLeave.bind(_this, _this.props.onMouseLeave);
+    _this.onMouseEnter = _this.onMouseEnter.bind(_this, onMouseEnter);
+    _this.onMouseMove = _this.onMouseMove.bind(_this, onMouseMove);
+    _this.onMouseLeave = _this.onMouseLeave.bind(_this, onMouseLeave);
     return _this;
   }
 
   _createClass(Tilt, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.element = (0, _reactDom.findDOMNode)(this);
-    }
-  }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       clearTimeout(this.transitionTimeout);
       cancelAnimationFrame(this.updateCall);
     }
   }, {
-    key: 'onMouseEnter',
+    key: "onMouseEnter",
     value: function onMouseEnter() {
-      var cb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
-      var e = arguments[1];
+      var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+      var event = arguments[1];
 
       this.updateElementPosition();
 
-      this.setState(Object.assign({}, this.state, {
-        style: _extends({}, this.state.style, {
-          willChange: "transform"
-        })
-      }));
+      var style = this.state.style;
+
+      style.willChange = "transform";
+
+      this.setState({
+        style: style
+      });
 
       this.setTransition();
 
-      return cb(e);
+      return callback(event);
     }
   }, {
-    key: 'reset',
+    key: "reset",
     value: function reset() {
       var _this2 = this;
 
       window.requestAnimationFrame(function () {
-        _this2.setState(Object.assign({}, _this2.state, {
-          style: _extends({}, _this2.state.style, {
-            transform: "perspective(" + _this2.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)" })
-        }));
+        var style = _this2.state.style;
+
+        style.transform = "perspective(" + _this2.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)";
+
+        _this2.setState({
+          style: style
+        });
       });
     }
   }, {
-    key: 'onMouseMove',
+    key: "onMouseMove",
     value: function onMouseMove() {
-      var cb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
-      var e = arguments[1];
+      var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+      var event = arguments[1];
 
-      e.persist();
+      event.persist();
 
       if (this.updateCall !== null) {
         window.cancelAnimationFrame(this.updateCall);
       }
 
-      this.event = e;
-      this.updateCall = requestAnimationFrame(this.update.bind(this, e));
+      this.event = event;
+      this.updateCall = requestAnimationFrame(this.update.bind(this, event));
 
-      return cb(e);
+      return callback(event);
     }
   }, {
-    key: 'setTransition',
+    key: "setTransition",
     value: function setTransition() {
       var _this3 = this;
 
       clearTimeout(this.transitionTimeout);
 
-      this.setState(Object.assign({}, this.state, {
-        style: _extends({}, this.state.style, {
-          transition: this.settings.speed + "ms " + this.settings.easing
-        })
-      }));
+      var _settings = this.settings,
+          speed = _settings.speed,
+          easing = _settings.easing;
+      var style = this.state.style;
+
+      style.transition = speed + "ms " + easing;
+      this.setState({
+        style: style
+      });
 
       this.transitionTimeout = setTimeout(function () {
-        _this3.setState(Object.assign({}, _this3.state, {
-          style: _extends({}, _this3.state.style, {
-            transition: ''
-          })
-        }));
-      }, this.settings.speed);
+        style.transition = "";
+        _this3.setState({
+          style: style
+        });
+      }, speed);
     }
   }, {
-    key: 'onMouseLeave',
+    key: "onMouseLeave",
     value: function onMouseLeave() {
-      var cb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
-      var e = arguments[1];
+      var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+      var event = arguments[1];
 
       this.setTransition();
 
-      if (this.settings.reset) {
-        this.reset();
-      }
-      return cb(e);
+      if (this.settings.reset) this.reset();
+
+      return callback(event);
     }
   }, {
-    key: 'getValues',
-    value: function getValues(e) {
-      var x = (e.nativeEvent.clientX - this.left) / this.width;
-      var y = (e.nativeEvent.clientY - this.top) / this.height;
+    key: "getValues",
+    value: function getValues(_ref) {
+      var nativeEvent = _ref.nativeEvent;
+
+      var x = (nativeEvent.clientX - this.left) / this.width;
+      var y = (nativeEvent.clientY - this.top) / this.height;
       var _x = Math.min(Math.max(x, 0), 1);
       var _y = Math.min(Math.max(y, 0), 1);
 
-      var tiltX = (this.reverse * (this.settings.max / 2 - _x * this.settings.max)).toFixed(2);
-      var tiltY = (this.reverse * (_y * this.settings.max - this.settings.max / 2)).toFixed(2);
+      var max = this.settings.max;
+
+
+      var tiltX = (this.reverse * (max / 2 - _x * max)).toFixed(2);
+      var tiltY = (this.reverse * (_y * max - max / 2)).toFixed(2);
 
       var percentageX = _x * 100;
       var percentageY = _y * 100;
@@ -177,34 +189,50 @@ var Tilt = function (_Component) {
       };
     }
   }, {
-    key: 'updateElementPosition',
+    key: "updateElementPosition",
     value: function updateElementPosition() {
-      var rect = this.element.getBoundingClientRect();
-      this.width = this.element.offsetWidth;
-      this.height = this.element.offsetHeight;
+      var rect = this.element.current.getBoundingClientRect();
+      var _element$current = this.element.current;
+      this.width = _element$current.offsetWidth;
+      this.height = _element$current.offsetHeight;
+
+
       this.left = rect.left;
       this.top = rect.top;
     }
   }, {
-    key: 'update',
-    value: function update(e) {
-      var values = this.getValues(e);
+    key: "update",
+    value: function update(event) {
+      var values = this.getValues(event);
 
-      this.setState(Object.assign({}, this.state, {
-        style: _extends({}, this.state.style, {
-          transform: "perspective(" + this.settings.perspective + "px) " + "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " + "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " + "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")"
-        })
-      }));
+      var _settings2 = this.settings,
+          perspective = _settings2.perspective,
+          axis = _settings2.axis,
+          scale = _settings2.scale;
+      var style = this.state.style;
+
+
+      var rotateXdeg = axis === "x" ? 0 : values.tiltY;
+      var rotateYdeg = axis === "y" ? 0 : values.tiltX;
+
+      style.transform = "perspective(" + perspective + "px) " + ("rotateX(" + rotateXdeg + "deg) ") + ("rotateY(" + rotateYdeg + "deg) ") + ("scale3d(" + scale + ", " + scale + ", " + scale + ")");
+
+      this.setState({
+        style: style
+      });
 
       this.updateCall = null;
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var style = Object.assign({}, this.props.style, this.state.style);
+      var style = _extends({}, this.props.style, this.state.style);
+
       return _react2.default.createElement(
-        'div',
-        { style: style,
+        "div",
+        {
+          ref: this.element,
+          style: style,
           className: this.props.className,
           onMouseEnter: this.onMouseEnter,
           onMouseMove: this.onMouseMove,

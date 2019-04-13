@@ -18,8 +18,7 @@
     "build": "babel ./src --out-dir ./dist"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0-beta || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0-beta || ^16.0.0"
+    "react": "^15.0.0 || ^16.0.0-beta || ^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
