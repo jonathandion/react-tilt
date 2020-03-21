@@ -74,6 +74,7 @@ class Tilt extends Component {
   }
   onMouseMove(cb = () => {}, e) {
     e.persist();
+    this.updateElementPosition();
 
     if (this.updateCall !== null) {
       window.cancelAnimationFrame(this.updateCall);
