@@ -18,7 +18,9 @@ class Tilt extends Component {
       speed: "1000",
       transition: true,
       axis: null,
-      reset: true
+      reset: true,
+      XOrigin: 0,
+      YOrigin: 0
     };
 
     this.width = null;
@@ -30,7 +32,10 @@ class Tilt extends Component {
     this.element = null;
     this.settings = Object.assign({}, defaultSettings, this.props.options);
     this.reverse = this.settings.reverse ? -1 : 1;
-
+    this.originFactor = {
+      x: 0.5 * (Math.min(Math.max(this.settings.XOrigin, -1) ,1) + 1),
+      y: 0.5 * (Math.min(Math.max(this.settings.YOrigin, -1), 1) + 1)
+    }
     // Events
     this.onMouseEnter = this.onMouseEnter.bind(this, this.props.onMouseEnter);
     this.onMouseMove = this.onMouseMove.bind(this, this.props.onMouseMove);
@@ -38,7 +43,7 @@ class Tilt extends Component {
   }
   componentDidMount() {
     this.element = findDOMNode(this);
-    const myNode = this.getDOMNode();
+    const myNode = this.element
     setTimeout(() => {
       if (myNode.parentElement.querySelector(':hover') === myNode){
         this.onMouseEnter();
@@ -117,8 +122,8 @@ class Tilt extends Component {
     const _x = Math.min(Math.max(x, 0), 1);
     const _y = Math.min(Math.max(y, 0), 1);
 
-    const tiltX = (this.reverse * (this.settings.max / 2 - _x * this.settings.max)).toFixed(2);
-    const tiltY = (this.reverse * (_y * this.settings.max - this.settings.max / 2)).toFixed(2);
+    const tiltX = (this.reverse * (this.settings.max * this.originFactor.x - _x * this.settings.max)).toFixed(2);
+    const tiltY = (this.reverse * (_y * this.settings.max - this.settings.max * this.originFactor.y)).toFixed(2);
 
     const percentageX =  _x * 100
     const percentageY = _y * 100

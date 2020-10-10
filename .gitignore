@@ -1,6 +1,7 @@
 # dependencies
-/node_modules
-
+**/node_modules
+**/dist
+package-lock.json
 # testing
 /coverage
 

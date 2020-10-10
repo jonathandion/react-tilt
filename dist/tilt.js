@@ -43,7 +43,9 @@ var Tilt = function (_Component) {
       speed: "1000",
       transition: true,
       axis: null,
-      reset: true
+      reset: true,
+      XOrigin: 0,
+      YOrigin: 0
     };
 
     _this.width = null;
@@ -55,9 +57,11 @@ var Tilt = function (_Component) {
     _this.element = null;
     _this.settings = Object.assign({}, defaultSettings, _this.props.options);
     _this.reverse = _this.settings.reverse ? -1 : 1;
-
-    // Events
-    _this.onMouseEnter = _this.onMouseEnter.bind(_this, _this.props.onMouseEnter);
+    _this.originFactor = {
+      x: 0.5 * (Math.min(Math.max(_this.settings.XOrigin, -1), 1) + 1),
+      y: 0.5 * (Math.min(Math.max(_this.settings.YOrigin, -1), 1) + 1)
+      // Events
+    };_this.onMouseEnter = _this.onMouseEnter.bind(_this, _this.props.onMouseEnter);
     _this.onMouseMove = _this.onMouseMove.bind(_this, _this.props.onMouseMove);
     _this.onMouseLeave = _this.onMouseLeave.bind(_this, _this.props.onMouseLeave);
     return _this;
@@ -66,7 +70,15 @@ var Tilt = function (_Component) {
   _createClass(Tilt, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       this.element = (0, _reactDom.findDOMNode)(this);
+      var myNode = this.element;
+      setTimeout(function () {
+        if (myNode.parentElement.querySelector(':hover') === myNode) {
+          _this2.onMouseEnter();
+        }
+      }, 0);
     }
   }, {
     key: 'componentWillUnmount',
@@ -95,12 +107,12 @@ var Tilt = function (_Component) {
   }, {
     key: 'reset',
     value: function reset() {
-      var _this2 = this;
+      var _this3 = this;
 
       window.requestAnimationFrame(function () {
-        _this2.setState(Object.assign({}, _this2.state, {
-          style: _extends({}, _this2.state.style, {
-            transform: "perspective(" + _this2.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)" })
+        _this3.setState(Object.assign({}, _this3.state, {
+          style: _extends({}, _this3.state.style, {
+            transform: "perspective(" + _this3.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)" })
         }));
       });
     }
@@ -124,7 +136,7 @@ var Tilt = function (_Component) {
   }, {
     key: 'setTransition',
     value: function setTransition() {
-      var _this3 = this;
+      var _this4 = this;
 
       clearTimeout(this.transitionTimeout);
 
@@ -135,8 +147,8 @@ var Tilt = function (_Component) {
       }));
 
       this.transitionTimeout = setTimeout(function () {
-        _this3.setState(Object.assign({}, _this3.state, {
-          style: _extends({}, _this3.state.style, {
+        _this4.setState(Object.assign({}, _this4.state, {
+          style: _extends({}, _this4.state.style, {
             transition: ''
           })
         }));
@@ -163,8 +175,8 @@ var Tilt = function (_Component) {
       var _x = Math.min(Math.max(x, 0), 1);
       var _y = Math.min(Math.max(y, 0), 1);
 
-      var tiltX = (this.reverse * (this.settings.max / 2 - _x * this.settings.max)).toFixed(2);
-      var tiltY = (this.reverse * (_y * this.settings.max - this.settings.max / 2)).toFixed(2);
+      var tiltX = (this.reverse * (this.settings.max * this.originFactor.x - _x * this.settings.max)).toFixed(2);
+      var tiltY = (this.reverse * (_y * this.settings.max - this.settings.max * this.originFactor.y)).toFixed(2);
 
       var percentageX = _x * 100;
       var percentageY = _y * 100;
