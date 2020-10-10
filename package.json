@@ -15,7 +15,8 @@
     "url": "https://github.com/jonathandion/react-tilt/issues"
   },
   "scripts": {
-    "build": "babel ./src --out-dir ./dist"
+    "build": "babel ./src --out-dir ./dist",
+    "postinstall": "npm run build"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0-beta || ^16.0.0",
