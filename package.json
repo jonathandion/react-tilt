@@ -11,6 +11,10 @@
     "tilt",
     "hover"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathandion/react-tilt.git"
+  },
   "bugs": {
     "url": "https://github.com/jonathandion/react-tilt/issues"
   },
