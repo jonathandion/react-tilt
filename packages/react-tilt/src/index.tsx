@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
 
 class Tilt extends Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
+    this.ref = React.createRef();
 
     this.state = {
-      style : {}
+      style: {}
     }
 
     const defaultSettings = {
@@ -31,16 +31,15 @@ class Tilt extends Component {
     this.settings = Object.assign({}, defaultSettings, this.props.options);
     this.reverse = this.settings.reverse ? -1 : 1;
 
-    // Events
     this.onMouseEnter = this.onMouseEnter.bind(this, this.props.onMouseEnter);
     this.onMouseMove = this.onMouseMove.bind(this, this.props.onMouseMove);
     this.onMouseLeave = this.onMouseLeave.bind(this, this.props.onMouseLeave);
   }
   componentDidMount() {
-    this.element = findDOMNode(this);
-    const myNode = this.getDOMNode();
+    this.element = this.ref.current;
+    console.log(this.element)
     setTimeout(() => {
-      if (myNode.parentElement.querySelector(':hover') === myNode){
+      if (this.element.parentElement.querySelector(':hover') === this.element) {
         this.onMouseEnter();
       }
     }, 0);
@@ -49,13 +48,13 @@ class Tilt extends Component {
     clearTimeout(this.transitionTimeout);
     cancelAnimationFrame(this.updateCall);
   }
-  onMouseEnter(cb = () => {}, e) {
+  onMouseEnter(cb = () => { }, e) {
     this.updateElementPosition();
 
     this.setState(Object.assign({}, this.state, {
-      style : {
+      style: {
         ...this.state.style,
-        willChange : "transform"
+        willChange: "transform"
       }
     }))
 
@@ -66,13 +65,14 @@ class Tilt extends Component {
   reset() {
     window.requestAnimationFrame(() => {
       this.setState(Object.assign({}, this.state, {
-        style : {
+        style: {
           ...this.state.style,
-          transform : "perspective(" + this.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)" }
+          transform: "perspective(" + this.settings.perspective + "px) " + "rotateX(0deg) " + "rotateY(0deg) " + "scale3d(1, 1, 1)"
+        }
       }))
     });
   }
-  onMouseMove(cb = () => {}, e) {
+  onMouseMove(cb = () => { }, e) {
     e.persist();
 
     if (this.updateCall !== null) {
@@ -88,22 +88,22 @@ class Tilt extends Component {
     clearTimeout(this.transitionTimeout);
 
     this.setState(Object.assign({}, this.state, {
-      style : {
+      style: {
         ...this.state.style,
-        transition : this.settings.speed + "ms " + this.settings.easing
+        transition: this.settings.speed + "ms " + this.settings.easing
       }
     }))
 
     this.transitionTimeout = setTimeout(() => {
       this.setState(Object.assign({}, this.state, {
-        style : {
+        style: {
           ...this.state.style,
           transition: ''
         }
       }))
     }, this.settings.speed);
   }
-  onMouseLeave(cb = () => {}, e) {
+  onMouseLeave(cb = () => { }, e) {
     this.setTransition();
 
     if (this.settings.reset) {
@@ -120,7 +120,7 @@ class Tilt extends Component {
     const tiltX = (this.reverse * (this.settings.max / 2 - _x * this.settings.max)).toFixed(2);
     const tiltY = (this.reverse * (_y * this.settings.max - this.settings.max / 2)).toFixed(2);
 
-    const percentageX =  _x * 100
+    const percentageX = _x * 100
     const percentageY = _y * 100
 
     return {
@@ -144,14 +144,14 @@ class Tilt extends Component {
     let values = this.getValues(e);
 
     this.setState(Object.assign({}, this.state, {
-        style : {
-          ...this.state.style,
-          transform: "perspective(" + this.settings.perspective + "px) " +
-                      "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
-                      "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
-                      "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")"
-        }
-      }))
+      style: {
+        ...this.state.style,
+        transform: "perspective(" + this.settings.perspective + "px) " +
+          "rotateX(" + (this.settings.axis === "x" ? 0 : values.tiltY) + "deg) " +
+          "rotateY(" + (this.settings.axis === "y" ? 0 : values.tiltX) + "deg) " +
+          "scale3d(" + this.settings.scale + ", " + this.settings.scale + ", " + this.settings.scale + ")"
+      }
+    }))
 
     this.updateCall = null;
   }
@@ -159,11 +159,12 @@ class Tilt extends Component {
     const style = Object.assign({}, this.props.style, this.state.style)
     return (
       <div style={style}
+        ref={this.ref}
         className={this.props.className}
         onMouseEnter={this.onMouseEnter}
         onMouseMove={this.onMouseMove}
         onMouseLeave={this.onMouseLeave}
-        >
+      >
         {this.props.children}
       </div>
     );

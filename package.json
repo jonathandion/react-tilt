@@ -1,30 +1,17 @@
 {
   "name": "react-tilt",
-  "version": "0.1.3",
-  "description": "Tilt for react.js",
-  "main": "dist/tilt.js",
-  "author": "Jonathan Dion <jonathandionalary@gmail.com> (http://jonathandion.com/)",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Tilt for React JS",
+  "author": "Jonathan Dion <jonathandionalary@gmail.com> (https://github.com/jonathandion/)",
   "license": "MIT",
-  "keywords": [
-    "react",
-    "parallax",
-    "tilt",
-    "hover"
-  ],
   "bugs": {
     "url": "https://github.com/jonathandion/react-tilt/issues"
   },
   "scripts": {
-    "build": "babel ./src --out-dir ./dist"
+    "build": "pnpm run --filter=react-tilt build",
+    "ci:publish": "pnpm publish -r",
   },
-  "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0-beta || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0-beta || ^16.0.0"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.4.0",
-    "babel-preset-react": "^6.24.1"
-  }
+  "peerDependencies": {},
+  "devDependencies": {}
 }
