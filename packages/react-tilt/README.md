@@ -14,7 +14,7 @@ A tiny requestAnimationFrame powered 60+fps lightweight parallax hover tilt effe
 
 ## Demo
 
-- [Reddit NTFs](https://nft.reddit.com/)
+- [Reddit NFTs](https://nft.reddit.com/)
 - [VX Demo](https://vx-demo.now.sh/gallery)
 
 ## Install
