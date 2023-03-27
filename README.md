@@ -4,9 +4,10 @@
 
 React version of [tilt.js](https://github.com/gijsroge/tilt.js)
 
-### Demo
+## Demo
 
-https://vx-demo.now.sh/gallery
+- [Reddit](https://nft.reddit.com/)
+- [VX](https://vx-demo.now.sh/gallery)
 
 ## Install
 
@@ -20,22 +21,10 @@ yarn add react-tilt react react-dom
 
 ## Usage
 
-```js
-import Tilt from 'react-tilt'
+```tsx
+import { Tilt } from 'react-tilt'
 
-function App() {
-  return (
-    <Tilt style={{ height: 250, width: 250 }}>
-      <div>👽</div>
-    </Tilt>
-  )
-}
-```
-
-## Options
-
-```js
-{
+const defaultOptions = {
 	reverse:        false,  // reverse the tilt direction
 	max:            35,     // max tilt rotation (degrees)
 	perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
@@ -43,12 +32,20 @@ function App() {
 	speed:          1000,   // Speed of the enter/exit transition
 	transition:     true,   // Set a transition on enter/exit.
 	axis:           null,   // What axis should be disabled. Can be X or Y.
-	reset:          true    // If the tilt effect has to be reset on exit.
+	reset:          true,    // If the tilt effect has to be reset on exit.
 	easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
+}
+
+const App = () => {
+  return (
+    <Tilt options={defaultOptions} style={{ height: 250, width: 250 }}>
+      <div>👽</div>
+    </Tilt>
+  )
 }
 ```
 
-## API
+## Props
 
 | Property         | Signature           | 
 | -------------    |:-------------:|
@@ -62,3 +59,7 @@ function App() {
 - **JQuery JS version:** https://github.com/gijsroge/tilt.js
 - **Vanilla JS version:** https://github.com/micku7zu/vanilla-tilt.js
 
+### Check Also
+
+- [Web Configs](https://github.com/jonathandion/web-configs) - Monorepo for all common configurations for building web apps.
+- [My Neovim Config](https://github.com/jonathandion/web-dev.nvim) - Small Neovim configuration written in Lua that is specifically designed for web development.

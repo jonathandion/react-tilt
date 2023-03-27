@@ -6,5 +6,5 @@ export default defineConfig({
   dts: false,
   external: ['react', 'react-dom'],
   outExtension: () => ({ js: '.js' }),
-  target: 'es2016'
+  target: 'es2016',
 })
