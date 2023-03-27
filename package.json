@@ -11,7 +11,7 @@
   "scripts": {
     "build": "pnpm run --filter=react-tilt --parallel build",
     "dev": "pnpm run --filter=react-* --parallel dev",
-    "publish": "pnpm publish -r",
+    "publish": "pnpm run build && pnpm publish -r",
     "lint": "eslint ."
   },
   "devDependencies": {
