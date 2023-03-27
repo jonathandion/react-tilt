@@ -1,0 +1,41 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+env:
+  CI: true
+  PNPM_CACHE_FOLDER: .pnpm-store
+jobs:
+  release:
+    if: github.repository == 'jonathandion/react-tilt'
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install pnpm
+        run: npm i pnpm@latest -g
+
+      - name: Setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Publish to npm
+        run: pnpm publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

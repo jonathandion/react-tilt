@@ -1,0 +1,41 @@
+{
+  "name": "react-tilt",
+  "version": "1.0.0",
+  "description": "Tilt for React JS",
+  "author": "Jonathan Dion <jonathandionalary@gmail.com> (https://github.com/jonathandion/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonathandion/react-tilt/issues"
+  },
+  "keywords": [
+    "react",
+    "parallax",
+    "tilt",
+    "hover",
+    "parallax"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "scripts": {
+    "build": "tsup && pnpm run types",
+    "dev": "tsup --watch",
+    "types": "tsup --dts-only",
+    "types:check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@types/react": "^18.0.29",
+    "@types/react-dom": "^18.0.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.29",
+    "@types/react-dom": "^18.0.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
