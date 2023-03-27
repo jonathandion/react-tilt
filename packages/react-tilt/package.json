@@ -21,7 +21,7 @@
     "dist/**/*.d.ts"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && pnpm run types",
     "dev": "tsup --watch",
     "types": "tsup --dts-only",
     "types:check": "tsc --noEmit"
