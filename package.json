@@ -5,7 +5,6 @@
   "description": "Tilt for React JS",
   "author": "Jonathan Dion <jonathandionalary@gmail.com> (https://github.com/jonathandion/)",
   "license": "MIT",
-  "repository": "jonathandion/react-tilt",
   "bugs": {
     "url": "https://github.com/jonathandion/react-tilt/issues"
   },
