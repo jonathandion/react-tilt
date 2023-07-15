@@ -1,6 +1,6 @@
 declare module 'react-tilt'{
   const Tilt: any;
-  export {
+  export default {
     Tilt,
   }
 }
