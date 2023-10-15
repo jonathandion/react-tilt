@@ -1,11 +1,4 @@
 <h1 align="center">
-⚠️ Deprecated
-</h1>
-<p align="center" style="text-align: center;">
-**This repository is no longer maintained. For the latest version, please visit <a href="https://github.com/jonathandion/mono/tree/main/packages/tilt-react">@jdion/tilt-react</a>
-</p>
-
-<h1 align="center">
 react-tilt 🪄
 </h1>
 <h4 align="center">
@@ -18,6 +11,10 @@ A tiny requestAnimationFrame powered 60+fps lightweight parallax hover tilt effe
 </p>
 
 ![react-tilt demo gif](https://github.com/jonathandion/react-tilt/blob/master/demo.gif)
+
+## ⚠️ Deprecated
+
+This repository is no longer maintained. For the latest version, please visit [@jdion/tilt-react](https://github.com/jonathandion/mono/tree/main/packages/tilt-react)
 
 ## Documentation
 
