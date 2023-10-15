@@ -1,4 +1,11 @@
 <h1 align="center">
+⚠️ Deprecated
+</h1>
+<p align="center" style="text-align: center;">
+**This repository is no longer maintained. For the latest version, please visit <a href="https://github.com/jonathandion/mono/tree/main/packages/tilt-react">@jdion/tilt-react</a>
+</p>
+
+<h1 align="center">
 react-tilt 🪄
 </h1>
 <h4 align="center">
